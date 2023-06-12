@@ -1,5 +1,5 @@
 import React from 'react'
-import {FootContainer} from './styled_components'
+import {FootContainer} from '../Styled Components/Footer'
 import {
   faFacebook,
   faTwitter,

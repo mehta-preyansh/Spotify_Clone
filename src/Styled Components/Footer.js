@@ -1,19 +1,21 @@
 import styled from 'styled-components'
-
 export const FootContainer = styled.div`
-
+  overflow-y: scroll;
   color: rgb(179, 179, 179);
   float: right;
   box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
   background-color: rgb(18, 18, 18);
-  width: calc(100vw - 72px);
-  height: 420px;
+  grid-column: 2;
+  grid-row: 2/ span 2;
   padding: 8px 32px 40px;
   .Footer__top{
     margin-top: 18px;
     display: flex;
+    flex-wrap: wrap;
     .links{
       display: flex;
+      flex-wrap: wrap;
       flex: 1 1 50%;
       ul{
         padding: 0 48px;
