@@ -9,17 +9,25 @@ import { TbMicrophone2} from 'react-icons/tb';
 import { HiOutlineQueueList} from 'react-icons/hi2';
 import { MdDevices} from 'react-icons/md';
 import { GoHeart} from 'react-icons/go';
+import { useStateProvider } from '../utils/StateProvider';
 function Player() {
+  const [{selectedTrack}, dispatch] = useStateProvider();
   return (
     <PlayerContainer>
       <div className='left__player'>
         <div className='thumbnail'>
-          <img src="sndvbsv" alt="Image" />
+          <img src={selectedTrack!==undefined?selectedTrack.imageUrl:null} alt="" />
         </div>
         <div className='song_details'>
-          <a href="">Haan</a>
-          <a href="">Pritam</a> , 
-          <a href="">KK</a>
+          <a href="">{selectedTrack.name}</a>
+          <div>
+            {
+              selectedTrack.artists!==undefined? 
+              selectedTrack.artists.map((artist)=> <><a href="">{artist}</a> </> )
+              : 
+              null
+            }
+          </div>
         </div>
         <div className='icons'>
           <GoHeart/>

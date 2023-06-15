@@ -3,8 +3,9 @@ import { HeadContainer } from '../Styled Components/Header'
 import {IoIosArrowBack, IoIosArrowForward, IoMdDownload} from 'react-icons/io'
 import {BsFillPersonFill} from 'react-icons/bs'
 function Header() {
+  
   return (
-      <HeadContainer>
+      <HeadContainer className='head_container'>
         <div className='navigation'>
           <button className='back'><IoIosArrowBack/></button>
           <button className='forward'><IoIosArrowForward/></button>

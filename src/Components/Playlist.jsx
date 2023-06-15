@@ -1,22 +1,29 @@
-import React, { useEffect } from 'react'
+import React from 'react';
+import { useStateProvider } from '../utils/StateProvider';
+import { reducerCases } from '../utils/constants';
 import styled from 'styled-components'
 import {RxDotFilled} from 'react-icons/rx'
 
-function Playlist({name, images, owner}) {
+function Playlist({name, images, owner, id}) {
+  const [{}, dispatch] = useStateProvider();
   const Imageurl = images[0].url
+  const handleClick = ()=>{
+    dispatch({type:reducerCases.SET_SELECTEDPLAYLIST, playlistId:id})
+  }
+    
   return (
     <li>
-      <PlayList>
+      <PlayListContainer onClick={handleClick} >
         <img src={Imageurl}/>
         <div className="data">
           <div className="name">{name}</div>
           <div className="creator">Playlist<RxDotFilled/>{owner.display_name}</div>
         </div>
-      </PlayList>
+      </PlayListContainer>
     </li>
   )
 }
-const PlayList = styled.div`
+const PlayListContainer = styled.div`
   display: flex;
   gap: 8px;
   padding: 8px;

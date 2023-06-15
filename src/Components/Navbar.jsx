@@ -21,10 +21,11 @@ function Navbar() {
       )
       const {items}=response.data;
       const playlists = items.map(({name, id, images, owner})=> {
-          return {name, id, images, owner}
-        }
+        return {name, id, images, owner}
+      }
       )
-      console.log(response.data.items)
+      
+      // console.log(response.data.items)
       dispatch({type:reducerCases.SET_PLAYLISTS, playlist:playlists})
     }
     getPlaylistData();
@@ -65,7 +66,13 @@ function Navbar() {
         <div className="playlists_data">
           <ul>
             {
-              playlists.map(item => <Playlist key={item.id} name={item.name} images={item.images} owner={item.owner}></Playlist>)
+              playlists.map(item => <Playlist
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  images={item.images}
+                  owner={item.owner}
+                 ></Playlist>)
             }
           </ul>
         </div>

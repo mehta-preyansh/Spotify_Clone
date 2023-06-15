@@ -1,5 +1,7 @@
 import styled from 'styled-components'
+
 export const HeadContainer = styled.div`
+  background-color: rgba(0,0,0,0);
   position: absolute;
   top: 0;
   padding: 12px 0 0 8px;
@@ -7,6 +9,7 @@ export const HeadContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 56px;
+  z-index: 1;
   .navigation{
     width: 100px;
     height: 100%;
@@ -30,7 +33,7 @@ export const HeadContainer = styled.div`
     }
   }
   .profile_section{
-    width: 40%;
+    width: 40vw;
     height: 100%;
     display: flex;
     align-items: center;

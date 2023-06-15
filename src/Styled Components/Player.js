@@ -7,7 +7,7 @@ export const PlayerContainer = styled.div`
   grid-row: 4;
   color: white;
   .mid__player{
-    flex: 4;
+    width: 40%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -77,7 +77,7 @@ export const PlayerContainer = styled.div`
     }
   }
   .right__player{
-    flex: 3;
+    width: 30%;
     display: flex;
     justify-content: flex-end;
     /* background-color: red; */
@@ -117,15 +117,21 @@ export const PlayerContainer = styled.div`
     }
   }
   .left__player{
-    flex: 3;
+    width: 30%;
     display: flex;
-    padding: 0 1rem;
+    padding: 0 0 0 1rem;
     align-items: stretch;
     height: 56px;
-    /* background-color: red; */
     .song_details{
       min-width: 40%;
       max-width: 60%;
+      margin-left: 16px;
+      align-self: center;
+      >a, >div{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
       a{
         color: #b3b3b3;
         font-size: 11px;
@@ -136,18 +142,23 @@ export const PlayerContainer = styled.div`
           text-decoration: underline;
         }
       }
-      a:first-child{
+      >a:first-child{
         color: white;
         display: block;
         font-size: 14px;
       }
     }
     .thumbnail, .icons{
+      img{
+        border-radius: 4px;
+      }
       display:flex ;
       justify-content: space-around;
       width: 56px;
       svg{
+        padding-left: 4px;
         height: 32px;
+        align-self: center;
       }
     }
   }
