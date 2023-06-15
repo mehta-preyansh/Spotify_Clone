@@ -82,7 +82,8 @@ function Body() {
           else return(
             <Song
               key ={uuidv4()}
-              id={index+1}
+              id={item.track.id}
+              number={index+1}
               date={item.added_at}
               imageUrl={item.track.album.images[0].url}
               time={item.track.duration_ms}

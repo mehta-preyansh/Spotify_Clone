@@ -4,8 +4,8 @@ import { useStateProvider } from '../utils/StateProvider';
 import {BsFillPlayFill} from 'react-icons/bs'
 import { reducerCases } from '../utils/constants';
 
-function Song({id, date, imageUrl, time, name, albumName, artists}) {
-  const data = {id, date, imageUrl, time, name, albumName, artists}
+function Song({id, number, date, imageUrl, time, name, albumName, artists}) {
+  const data = {id, number, date, imageUrl, time, name, albumName, artists}
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const d = new Date(date)
   const year=d.getFullYear();
@@ -21,7 +21,7 @@ function Song({id, date, imageUrl, time, name, albumName, artists}) {
   return (
     <SongContainer>
       <button className='play_song'>
-        <span>{id}</span>
+        <span>{number}</span>
         <BsFillPlayFill onClick={handleClick} />
       </button>
       <div className="image" style={{backgroundImage: `url(${imageUrl})`}}/>

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import axios from 'axios'
 import {PlayerContainer} from '../Styled Components/Player'
 import { FaPlayCircle, FaVolumeUp, FaVolumeOff, FaVolumeDown, FaVolumeMute} from 'react-icons/fa';
 import { BiSkipNext, BiSkipPrevious} from 'react-icons/bi';
@@ -11,7 +12,19 @@ import { MdDevices} from 'react-icons/md';
 import { GoHeart} from 'react-icons/go';
 import { useStateProvider } from '../utils/StateProvider';
 function Player() {
-  const [{selectedTrack}, dispatch] = useStateProvider();
+  const [{token, selectedTrack}, dispatch] = useStateProvider();
+  useEffect(()=>{
+    const getAudio = async ()=>{
+      const response = await axios.get(`https://api.spotify.com/v1/tracks/${JSON.stringify(selectedTrack)==='{}' ? "11dFghVXANMlKmJXsNCbNl": selectedTrack.id}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      })
+      console.log(response)
+    }
+    getAudio();
+  })
   return (
     <PlayerContainer>
       <div className='left__player'>
