@@ -1,14 +1,21 @@
+// ********************ICONS************************
+import { RiStackFill } from 'react-icons/ri'
+import {AiOutlinePlus} from 'react-icons/ai'
+import {FiArrowRight} from 'react-icons/fi'
+
+// ********************IMPORTANT IMPORTS**********************
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import Playlist from './Playlist'
 import {useStateProvider} from '../utils/StateProvider'
 import { NavbarContainer } from '../Styled Components/Navbar'
-import { RiStackLine, RiStackFill } from 'react-icons/ri'
-import {AiOutlinePlus} from 'react-icons/ai'
-import {FiArrowRight, FiSearch} from 'react-icons/fi'
 import { reducerCases } from '../utils/constants'
+
 function Navbar() {
+// Accessing the state of the application
   const [ {token, playlists} , dispatch] = useStateProvider();
+
+//Get current user's playlists everytime the component re-renders
   useEffect(()=>{
     const getPlaylistData = async ()=>{
       const response = await axios.get(`https://api.spotify.com/v1/me/playlists`,
@@ -20,12 +27,10 @@ function Navbar() {
         }
       )
       const {items}=response.data;
-      const playlists = items.map(({name, id, images, owner})=> {
-        return {name, id, images, owner}
-      }
+      const playlists = items.map(({name, id, images, owner})=>{
+          return {name, id, images, owner}
+        }
       )
-      
-      // console.log(response.data.items)
       dispatch({type:reducerCases.SET_PLAYLISTS, playlist:playlists})
     }
     getPlaylistData();

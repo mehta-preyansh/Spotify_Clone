@@ -1,7 +1,11 @@
-import React from 'react'
-import { HeadContainer } from '../Styled Components/Header'
+// ****************ICONS******************
 import {IoIosArrowBack, IoIosArrowForward, IoMdDownload} from 'react-icons/io'
 import {BsFillPersonFill} from 'react-icons/bs'
+
+// ****************IMPORTANT IMPORTS*************
+import React from 'react'
+import { HeadContainer } from '../Styled Components/Header'
+
 function Header() {
   
   return (

@@ -1,6 +1,9 @@
+// *********ICONS**********
+import { FaHome, FaSearch } from 'react-icons/fa';
+
+// ***********IMPORTANT IMPORTS************
 import React from 'react'
 import { HomeSearchContainer } from '../Styled Components/HomeSearch'
-import { FaHome, FaSearch } from 'react-icons/fa';
 
 function HomeSearch() {
   return (

@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import {PlayerContainer} from '../Styled Components/Player'
-import { FaPlayCircle, FaVolumeUp, FaVolumeOff, FaVolumeDown, FaVolumeMute} from 'react-icons/fa';
+//**************ICONS***************
+import { FaPlayCircle, FaVolumeUp, FaRegPauseCircle, FaVolumeOff, FaVolumeDown, FaVolumeMute} from 'react-icons/fa';
 import { BiSkipNext, BiSkipPrevious} from 'react-icons/bi';
 import { IoIosShuffle} from 'react-icons/io';
 import { SlLoop} from 'react-icons/sl';
@@ -10,21 +8,50 @@ import { TbMicrophone2} from 'react-icons/tb';
 import { HiOutlineQueueList} from 'react-icons/hi2';
 import { MdDevices} from 'react-icons/md';
 import { GoHeart} from 'react-icons/go';
+
+//*********IMPORTANT IMPORTS**************/
+import React, { useEffect } from 'react'
+import {PlayerContainer} from '../Styled Components/Player'
 import { useStateProvider } from '../utils/StateProvider';
+import { reducerCases } from '../utils/constants';
+import {v4 as uuidv4} from 'uuid'
+uuidv4();
+
+
 function Player() {
-  const [{token, selectedTrack}, dispatch] = useStateProvider();
+//Accessing State of the application
+  const [{selectedTrack, playerState}, dispatch] = useStateProvider();
+
+//Appending audio tag at the end of body each time we change the track (also removing the previous one)
   useEffect(()=>{
-    const getAudio = async ()=>{
-      const response = await axios.get(`https://api.spotify.com/v1/tracks/${JSON.stringify(selectedTrack)==='{}' ? "11dFghVXANMlKmJXsNCbNl": selectedTrack.id}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-      })
-      console.log(response)
+    const music =  document.createElement("audio")
+    music.classList.add("audio_file")
+    music.setAttribute("src", selectedTrack.audioUrl)
+    document.body.removeChild(document.body.lastChild)
+    document.body.appendChild(music)
+  }, [selectedTrack])
+
+//Controlling audio upon change in player state
+  useEffect(()=>{
+    const audioNode = document.querySelector(".audio_file");  
+    if(audioNode.getAttribute("src")!="null" && audioNode.getAttribute("src")!="undefined"){
+      if(playerState){
+        audioNode.play();
+      }
+      else{
+        audioNode.pause();
+      }
     }
-    getAudio();
-  })
+  },[playerState, selectedTrack])
+
+//Handlers to change the player state
+  const handlePlay = ()=>{
+    dispatch({type: reducerCases.SET_PLAYERSTATE, playerState: true})
+  }
+  const handlePause = ()=>{
+    dispatch({type: reducerCases.SET_PLAYERSTATE, playerState: false})
+  }
+
   return (
     <PlayerContainer>
       <div className='left__player'>
@@ -32,11 +59,11 @@ function Player() {
           <img src={selectedTrack!==undefined?selectedTrack.imageUrl:null} alt="" />
         </div>
         <div className='song_details'>
-          <a href="">{selectedTrack.name}</a>
+          <a>{selectedTrack.name}</a>
           <div>
             {
               selectedTrack.artists!==undefined? 
-              selectedTrack.artists.map((artist)=> <><a href="">{artist}</a> </> )
+              selectedTrack.artists.map((artist)=> <a key={uuidv4()}>{artist}</a>)
               : 
               null
             }
@@ -51,7 +78,11 @@ function Player() {
         <div className='controls'>
           <IoIosShuffle className='shuffle_btn'/>
           <BiSkipPrevious className='prev_btn'/>
-          <FaPlayCircle className='play_btn'/>
+          {
+            (playerState===true)?<FaRegPauseCircle onClick={handlePause}></FaRegPauseCircle>
+            :
+            <FaPlayCircle className='play_btn' onClick={handlePlay}/>
+          }
           <BiSkipNext className='next_btn'/>
           <SlLoop className='loop_btn'/>
         </div>

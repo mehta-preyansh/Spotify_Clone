@@ -10,8 +10,8 @@ function Spotify() {
     <MainContainer>
       <HomeSearch/>
       <Navbar/>
-      <Player/>
       <Main/>
+      <Player/>
     </MainContainer>
   )
 }

@@ -6,7 +6,6 @@ export default function Login() {
   const handleChange = (e)=>{
     setVal(e.target.value);
   }
-  console.log(value)
   const handleClick=(value)=>{
     const clientId = value === ''? '8845d1e3ab8e4f5ebf89d05eab07f1bc': value; 
     const redirectURL='http://localhost:3000/';
