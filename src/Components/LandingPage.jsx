@@ -1,10 +1,10 @@
 import React from 'react'
-
+import { LandingContainer } from '../Styled Components/LandingPage'
 function LandingPage() {
   return (
-    <>
-    <h1>Landing Page</h1>
-    </>
+    <LandingContainer>
+      
+    </LandingContainer>
   )
 }
 

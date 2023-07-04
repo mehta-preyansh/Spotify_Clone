@@ -1,38 +1,33 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { BodyContainer } from '../Styled Components/Body.js'
 import { useStateProvider } from '../utils/StateProvider.jsx'
 import { reducerCases } from '../utils/constants.js';
 import LandingPage from './LandingPage.jsx';
 import SongList from './SongList.jsx';
-
+import Footer from './Footer.jsx'
 
 function Body() {
 // Accessing state of application 
-  const [{ token, selectedPlaylistId, selectedPlaylistData}, dispatch] = useStateProvider();
+  const [{ token, selectedPlaylistId, selectedPlaylistData, homePage}, dispatch] = useStateProvider();
 
-// Scroll event listner is added the first time this component renders
-  useEffect(()=>{
-    const body = document.querySelector(".scrollBody")
-      body.addEventListener('scroll',()=>{
-        const title = document.querySelector(".column")
-        title.style.backgroundColor=`rgba(219,112,147,${body.scrollTop/280})`
-        const head = document.querySelector(".head_container")
-        head.style.backgroundColor=`rgba(219,112,147,${body.scrollTop/280})`
-      })
-  },[])
+
+//Setting random color
+const [randomColor, setRandomColor]=useState("")
+
 
 // Setting the playlist data using its id we got from Playlist component
   useEffect(() => {
     const getSelectedPlaylist = async () => {
       if(selectedPlaylistId!=""){
         await axios.get(`https://api.spotify.com/v1/playlists/${selectedPlaylistId}`, {
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
         })
         .then((response)=>{
+          setRandomColor('#'+Math.floor(Math.random()*16777215).toString(16)+"99")
           dispatch({ type: reducerCases.SET_SELECTEDPLAYLISTDATA, playlistData: response.data })
         })
         .catch((err)=>{
@@ -47,11 +42,12 @@ function Body() {
   
   return (
     <BodyContainer className='scrollBody'>
-      {JSON.stringify(selectedPlaylistData) === '{}' ?
+      {JSON.stringify(selectedPlaylistData) === '{}' || (homePage)?
         <LandingPage/>
         :
-        <SongList selectedPlaylistData={selectedPlaylistData}/>
+        <SongList color={randomColor}/>
       }
+      <Footer/>
     </BodyContainer>
   )
 }

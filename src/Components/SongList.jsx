@@ -1,12 +1,49 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { RxDotFilled } from 'react-icons/rx'
 import { FaHashtag } from 'react-icons/fa'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import Song from './Song'
 import {v4 as uuidv4} from 'uuid'
+import { useStateProvider } from '../utils/StateProvider'
+import { reducerCases } from '../utils/constants'
 uuidv4();
 
-function SongList({selectedPlaylistData}) {
+function SongList({color}) {
+
+  const [{selectedPlaylistData}, dispatch]=useStateProvider();
+
+  // Scroll event listner is added the first time this component renders
+  const body = document.querySelector(".scrollBody")
+  const red = parseInt(color.substring(1, 3), 16);
+  const green = parseInt(color.substring(3, 5), 16);
+  const blue = parseInt(color.substring(5, 7), 16);
+  const handleScroll = ()=>{
+    const title = document.querySelector(".column")
+    title.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
+    const head = document.querySelector(".head_container")
+    head.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
+  }
+
+  //array of songs from the selected playlist so that we can use next and prev functionality in player
+  const songs = selectedPlaylistData.tracks.items.filter((item)=>{
+    return item.track!==null && item.track.name!==""
+  })
+
+  console.log(songs);
+  useEffect(()=>{
+    body.addEventListener('scroll',handleScroll)
+    body.scrollTop=0;
+    body.style.backgroundColor=color
+    const title = document.querySelector(".column")
+    title.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
+    const head = document.querySelector(".head_container")
+    head.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
+    dispatch({type: reducerCases.SET_SELECTEDPLAYLISTSONGS, playlistSongs: songs})
+    return ()=>{
+      body.removeEventListener('scroll',handleScroll)
+    }
+  },[selectedPlaylistData])
+
   return (
     <>
       <div className="body_heading">
@@ -47,20 +84,15 @@ function SongList({selectedPlaylistData}) {
         </div>
       <div className="song_list">
         {selectedPlaylistData.tracks.items.map((item,index)=>{
-          if (item===null || item.track===null || item.track.album.images.length === 0) return null
+          if (
+              item===null || 
+              item.track===null || 
+              item.track.name===undefined || 
+              item.track.album===null || 
+              item.track.album.images.length === 0
+            ){return null}
           else return(
-            <Song
-              key ={uuidv4()}
-              id={item.track.id}
-              number={index+1}
-              date={item.added_at}
-              audioUrl={item.track.preview_url}
-              imageUrl={item.track.album.images[0].url}
-              time={item.track.duration_ms}
-              name={item.track.name}
-              albumName={item.track.album.name}
-              artists={item.track.album.artists.map(artist=>artist.name)}
-            />
+            <Song key = {uuidv4()} item = {item} number={index+1}/>
           )
         })}
       </div>

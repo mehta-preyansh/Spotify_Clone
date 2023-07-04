@@ -7,7 +7,7 @@ export default function Login() {
     setVal(e.target.value);
   }
   const handleClick=(value)=>{
-    const clientId = value === ''? '8845d1e3ab8e4f5ebf89d05eab07f1bc': value; 
+    const clientId = '8845d1e3ab8e4f5ebf89d05eab07f1bc'; 
     const redirectURL='http://localhost:3000/';
     const apiURL = 'https://accounts.spotify.com/authorize';
     const scope = ['user-read-email',
@@ -23,7 +23,6 @@ export default function Login() {
   return (
     <Container>
       <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png" alt="Spotify" />
-      <input type="text" value={value} onChange={handleChange} placeholder='Enter Client Id'/>
       <button onClick={()=>handleClick(value)} >Connect to spotify</button>
     </Container>
   )

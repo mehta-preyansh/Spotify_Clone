@@ -5,8 +5,10 @@ export const initialState = {
   playlists:[],
   selectedPlaylistId: '',
   selectedPlaylistData: {},
+  selectedPlaylistSongs: [],
   selectedTrack:{},
-  playerState:false
+  playerState:false,
+  homePage:true
 };
 
 const reducer = (state, action)=>{
@@ -28,6 +30,12 @@ const reducer = (state, action)=>{
     }
     case reducerCases.SET_PLAYERSTATE: {
       return {...state, playerState: action.playerState}
+    }
+    case reducerCases.SET_HOME: {
+      return {...state, homePage: action.setHome}
+    }
+    case reducerCases.SET_SELECTEDPLAYLISTSONGS: {
+      return {...state, selectedPlaylistSongs: action.playlistSongs}
     }
     default: return state;
   }

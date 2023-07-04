@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 export const MainContent = styled.div`
   position: relative;
-  background-color: palevioletred;
   border-radius: 10px;
   grid-row: 1/ span 3;
   grid-column: 2/ span 1;

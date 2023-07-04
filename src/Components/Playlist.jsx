@@ -15,6 +15,7 @@ function Playlist({name, images, owner, id}) {
   // Setting the selected playlist id to be accessed in body component
   const handleClick = ()=>{
     dispatch({type:reducerCases.SET_SELECTEDPLAYLIST, playlistId:id})
+    dispatch({type:reducerCases.SET_HOME, setHome:false})
   }
     
   return (

@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 export const FootContainer = styled.div`
-  overflow-y: scroll;
+  width: 100%;
+  height: fit-content;
   color: rgb(179, 179, 179);
-  float: right;
   box-sizing: border-box;
-  border-radius: 0 0 10px 10px;
+  /* border-radius: 0 0 10px 10px; */
   background-color: rgb(18, 18, 18);
-  grid-column: 2;
-  grid-row: 2/ span 2;
   padding: 8px 32px 40px;
+  /* position: absolute;
+  bottom: 0; */
   .Footer__top{
     margin-top: 18px;
     display: flex;
@@ -65,6 +65,7 @@ export const FootContainer = styled.div`
     border-color: rgba(255, 255, 255, 0.1);
   }
   .Footer__bottom{
+    
     padding: 32px 13px;
     display: flex;
     align-items: start;

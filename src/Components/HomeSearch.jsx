@@ -2,10 +2,19 @@
 import { FaHome, FaSearch } from 'react-icons/fa';
 
 // ***********IMPORTANT IMPORTS************
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HomeSearchContainer } from '../Styled Components/HomeSearch'
+import { useStateProvider } from '../utils/StateProvider';
+import { reducerCases } from '../utils/constants';
 
 function HomeSearch() {
+  const [{token}, dispatch] = useStateProvider();
+  useEffect(()=>{
+    document.querySelector(".home").addEventListener("click", ()=>{
+      dispatch({type:reducerCases.SET_HOME, setHome:true})
+    })
+  },[])
+
   return (
     <HomeSearchContainer>
       <div className='home'>
