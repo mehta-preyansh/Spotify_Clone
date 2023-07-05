@@ -9,17 +9,15 @@ import Footer from './Footer.jsx'
 
 function Body() {
 // Accessing state of application 
-  const [{ token, selectedPlaylistId, selectedPlaylistData, homePage}, dispatch] = useStateProvider();
-
+const [{ token, selectedPlaylistId, selectedPlaylistData, homePage}, dispatch] = useStateProvider();
 
 //Setting random color
 const [randomColor, setRandomColor]=useState("")
 
-
 // Setting the playlist data using its id we got from Playlist component
   useEffect(() => {
     const getSelectedPlaylist = async () => {
-      if(selectedPlaylistId!=""){
+      if(selectedPlaylistId!==""){
         await axios.get(`https://api.spotify.com/v1/playlists/${selectedPlaylistId}`, {
           headers: {
             Authorization: "Bearer " + token,
@@ -27,21 +25,20 @@ const [randomColor, setRandomColor]=useState("")
           },
         })
         .then((response)=>{
-          setRandomColor('#'+Math.floor(Math.random()*16777215).toString(16)+"99")
           dispatch({ type: reducerCases.SET_SELECTEDPLAYLISTDATA, playlistData: response.data })
         })
         .catch((err)=>{
           console.log(err)
         })
+        setRandomColor('#'+Math.floor(Math.random()*16777215).toString(16)+"99")
+        dispatch({type:reducerCases.SET_HOME, setHome:false})
       }
     }
     getSelectedPlaylist();
-    
   }, [token, dispatch, selectedPlaylistId])
-
   
   return (
-    <BodyContainer className='scrollBody'>
+    <BodyContainer className='scrollBody'>  
       {JSON.stringify(selectedPlaylistData) === '{}' || (homePage)?
         <LandingPage/>
         :
@@ -51,5 +48,5 @@ const [randomColor, setRandomColor]=useState("")
     </BodyContainer>
   )
 }
-  
+
 export default React.memo(Body)

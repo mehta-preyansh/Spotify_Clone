@@ -29,7 +29,6 @@ function SongList({color}) {
     return item.track!==null && item.track.name!==""
   })
 
-  console.log(songs);
   useEffect(()=>{
     body.addEventListener('scroll',handleScroll)
     body.scrollTop=0;

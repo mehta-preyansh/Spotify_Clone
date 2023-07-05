@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 export const PlayListContainer = styled.div`
   display: flex;
   gap: 8px;
@@ -18,7 +19,7 @@ export const PlayListContainer = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 56px;
     width: calc(100% - 56px - 8px);
     .name{

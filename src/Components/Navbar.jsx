@@ -77,6 +77,7 @@ function Navbar() {
                   name={item.name}
                   images={item.images}
                   owner={item.owner}
+                  onHomePage={false}
                  ></Playlist>)
             }
           </ul>

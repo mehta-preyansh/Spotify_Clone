@@ -30,12 +30,14 @@ function Player() {
     const music =  document.createElement("audio")
     music.classList.add("audio_file")
     music.setAttribute("src", flag?"":selectedTrack.track.preview_url)
+    music.volume=document.querySelector(".volume_level").value/100
     document.body.removeChild(document.body.lastChild)
     document.body.appendChild(music)
-  }, [selectedTrack])
 
+  }, [selectedTrack])
+  
 //Controlling audio upon change in player state
-useEffect(()=>{
+  useEffect(()=>{
     const audioNode = document.querySelector(".audio_file");
     if(audioNode.getAttribute("src")!="null" && audioNode.getAttribute("src")!="undefined"){
       if(playerState){
@@ -73,6 +75,7 @@ useEffect(()=>{
 //Handling volume levels 
   const [volume, setVolume]=useState(0);
   const handleVolume = (e)=>{
+    document.querySelector(".audio_file").volume=e.target.value/100
     setVolume(e.target.value)
   }
   let volumeIcon=<FaVolumeMute/>

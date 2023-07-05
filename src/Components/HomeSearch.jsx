@@ -8,10 +8,11 @@ import { useStateProvider } from '../utils/StateProvider';
 import { reducerCases } from '../utils/constants';
 
 function HomeSearch() {
-  const [{token}, dispatch] = useStateProvider();
+  const [{}, dispatch] = useStateProvider();
   useEffect(()=>{
     document.querySelector(".home").addEventListener("click", ()=>{
       dispatch({type:reducerCases.SET_HOME, setHome:true})
+      dispatch({type:reducerCases.SET_SELECTEDPLAYLIST, playlistId:''})
     })
   },[])
 

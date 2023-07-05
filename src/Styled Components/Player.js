@@ -2,7 +2,6 @@ import styled from 'styled-components'
 export const PlayerContainer = styled.div`
   display: flex;
   align-items: center;
-  /* background-color: grey; */
   grid-column: 1/span all;
   grid-row: 4;
   color: white;
@@ -80,7 +79,6 @@ export const PlayerContainer = styled.div`
     width: 30%;
     display: flex;
     justify-content: flex-end;
-    /* background-color: red; */
     svg{
       font-size: 36px;
       padding: 8px;
@@ -109,9 +107,6 @@ export const PlayerContainer = styled.div`
           background: #49f585;
           transition: all 0.2s;
           cursor: pointer;
-          &:hover{
-            background: #1db954;
-          }
         }
       }
     }

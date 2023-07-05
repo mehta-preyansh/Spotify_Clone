@@ -19,6 +19,7 @@ export const NavbarContainer = styled.div`
     height: 30%;
     display: flex;
     flex-direction: column ;
+    box-shadow: 0 6px 10px rgba(0,0,0,.6);
     .library{
       height: 50%;
       padding: 8px 16px;
