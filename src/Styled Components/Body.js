@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 export const BodyContainer = styled.div`
-  /* background-color: red; */
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -30,7 +29,6 @@ export const BodyContainer = styled.div`
     padding: 64px 24px 24px 24px;
     display: flex;
     align-items: end;
-    /* background-color: blue; */
     .curr_playlist_img{
       img{
         box-shadow: 0 4px 60px rgba(0,0,0,.5);
@@ -77,6 +75,7 @@ export const BodyContainer = styled.div`
       height: 56px;
       align-items: center;
       z-index: 1;
+      transition: all 0.2s ease;
       div{
         height: inherit;
         line-height: 56px;
@@ -92,6 +91,5 @@ export const BodyContainer = styled.div`
     }
   .song_list{
     padding: 0 24px;
-    
   }
 `

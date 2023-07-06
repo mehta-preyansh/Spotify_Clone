@@ -4,6 +4,7 @@ export const PlayListContainer = styled.div`
   display: flex;
   gap: 8px;
   padding: 8px;
+  color: #fff;
   margin: 0 6px;
   border-radius: 8px;
   &:hover{

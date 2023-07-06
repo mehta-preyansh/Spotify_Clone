@@ -11,6 +11,7 @@ function HomeSearch() {
   const [{}, dispatch] = useStateProvider();
   useEffect(()=>{
     document.querySelector(".home").addEventListener("click", ()=>{
+      document.querySelector(".scrollBody").style.backgroundColor="transparent"
       dispatch({type:reducerCases.SET_HOME, setHome:true})
       dispatch({type:reducerCases.SET_SELECTEDPLAYLIST, playlistId:''})
     })

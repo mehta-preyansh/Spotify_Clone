@@ -11,16 +11,22 @@ uuidv4();
 function SongList({color}) {
 
   const [{selectedPlaylistData}, dispatch]=useStateProvider();
-
+  
   // Scroll event listner is added the first time this component renders
   const body = document.querySelector(".scrollBody")
   const red = parseInt(color.substring(1, 3), 16);
   const green = parseInt(color.substring(3, 5), 16);
   const blue = parseInt(color.substring(5, 7), 16);
+
   const handleScroll = ()=>{
     const title = document.querySelector(".column")
-    title.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
     const head = document.querySelector(".head_container")
+    if(body.scrollTop>=280){
+      title.style.backgroundColor="rgb(26, 26, 26)"
+    }
+    else{
+      title.style.backgroundColor="transparent"
+    }
     head.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
   }
 
@@ -33,8 +39,6 @@ function SongList({color}) {
     body.addEventListener('scroll',handleScroll)
     body.scrollTop=0;
     body.style.backgroundColor=color
-    const title = document.querySelector(".column")
-    title.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
     const head = document.querySelector(".head_container")
     head.style.backgroundColor=`rgba(${red},${green},${blue},${body.scrollTop/280})`
     dispatch({type: reducerCases.SET_SELECTEDPLAYLISTSONGS, playlistSongs: songs})
@@ -80,7 +84,7 @@ function SongList({color}) {
             <div>
               <AiOutlineClockCircle/>
             </div>
-        </div>
+      </div>
       <div className="song_list">
         {selectedPlaylistData.tracks.items.map((item,index)=>{
           if (

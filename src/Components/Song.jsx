@@ -19,6 +19,7 @@ function Song({item, number}) {
     dispatch({type: reducerCases.SET_PLAYERSTATE, playerState: true})
     dispatch({type: reducerCases.SET_SELECTEDTRACK, trackData: item})
   }
+  
 
   return (
     <SongContainer>

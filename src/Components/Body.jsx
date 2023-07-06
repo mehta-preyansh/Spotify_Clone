@@ -5,10 +5,10 @@ import { useStateProvider } from '../utils/StateProvider.jsx'
 import { reducerCases } from '../utils/constants.js';
 import LandingPage from './LandingPage.jsx';
 import SongList from './SongList.jsx';
-import Footer from './Footer.jsx'
+import Footer from './Footer.jsx';
 
 function Body() {
-// Accessing state of application 
+// Accessing state of application
 const [{ token, selectedPlaylistId, selectedPlaylistData, homePage}, dispatch] = useStateProvider();
 
 //Setting random color

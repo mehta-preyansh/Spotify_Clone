@@ -52,6 +52,7 @@ function Player() {
 //Handlers to change the player state
   const currentSongIndex=selectedPlaylistSongs.indexOf(selectedTrack);
   const handlePlay = ()=>{
+    if(JSON.stringify(selectedTrack)!="{}")
     dispatch({type: reducerCases.SET_PLAYERSTATE, playerState: true})
   }
   const handlePause = ()=>{
